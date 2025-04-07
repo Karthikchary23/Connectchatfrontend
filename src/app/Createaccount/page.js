@@ -23,7 +23,7 @@ const Page = () => {
   const handleSendOtp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/send-otp", {
+      const response = await axios.post("https://chattingbackend-79ur.onrender.com/send-otp", {
         email: data.email,
       });
       if (response.status === 200) {
@@ -40,7 +40,7 @@ const Page = () => {
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/verify-otp", {
+      const response = await axios.post("https://chattingbackend-79ur.onrender.com/verify-otp", {
         email: data.email,
         otp,
       });
@@ -65,7 +65,7 @@ const Page = () => {
 
     try {
       console.log("Data sending:", data);
-      const response = await axios.post("http://localhost:5000/createaccount", {
+      const response = await axios.post("https://chattingbackend-79ur.onrender.com/createaccount", {
         ...data,
         isVerified, // Pass verification status
       });

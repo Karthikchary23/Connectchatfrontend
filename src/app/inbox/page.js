@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:5000", { withCredentials: true });
+const socket = io("https://chattingbackend-79ur.onrender.com", { withCredentials: true });
 
 const Page = () => {
   const [userData, setUserData] = useState(null);
@@ -25,7 +25,7 @@ const Page = () => {
     }
 
     axios
-      .post("http://localhost:5000/decode", { token })
+      .post("https://chattingbackend-79ur.onrender.com/decode", { token })
       .then((response) => {
         if (response.status === 200) {
           setUserData(response.data);
@@ -44,7 +44,7 @@ const Page = () => {
   useEffect(() => {
     if (userData && selectedUser) {
       axios
-        .get(`http://localhost:5000/messages/${userData.userId}/${selectedUser._id}`)
+        .get(`https://chattingbackend-79ur.onrender.com/messages/${userData.userId}/${selectedUser._id}`)
         .then((response) => {
           setMessages(response.data.map((msg) => ({
             text: msg.text,
@@ -84,7 +84,7 @@ const Page = () => {
 
     if (query.length > 0) {
       try {
-        const response = await axios.get(`http://localhost:5000/search-users?query=${query}`);
+        const response = await axios.get(`https://chattingbackend-79ur.onrender.com/search-users?query=${query}`);
         setSearchResults(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
