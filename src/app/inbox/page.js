@@ -40,7 +40,6 @@ const Page = () => {
       });
   }, []);
 
-  // Fetch chat history when a user is selected
   useEffect(() => {
     if (userData && selectedUser) {
       axios
@@ -74,7 +73,7 @@ const Page = () => {
       }
     });
 
-    return () => socket.off("receiveMessage"); // Cleanup listener
+    return () => socket.off("receiveMessage"); 
   }, [selectedUser, userData]);
 
   // Handle user search

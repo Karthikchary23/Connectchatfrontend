@@ -47,7 +47,7 @@ const Page = () => {
       if (response.status === 200) {
         alert("OTP verified successfully!");
         setIsVerified(true);
-        setOtpSent(false); // Hide OTP input after verification
+        setOtpSent(false); 
       }
     } catch (error) {
       alert("Invalid or expired OTP. Please try again.");
@@ -55,7 +55,6 @@ const Page = () => {
     }
   };
 
-  // Submit form to create account
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isVerified) {
@@ -67,7 +66,7 @@ const Page = () => {
       console.log("Data sending:", data);
       const response = await axios.post("https://chattingbackend-79ur.onrender.com/createaccount", {
         ...data,
-        isVerified, // Pass verification status
+        isVerified, 
       });
       if (response.status === 200) {
         alert("Account created successfully!");
@@ -99,7 +98,7 @@ const Page = () => {
               value={data.email}
               onChange={handleChange}
               required
-              disabled={otpSent || isVerified} // Disable after OTP sent or verified
+              disabled={otpSent || isVerified} 
             />
           </div>
 
