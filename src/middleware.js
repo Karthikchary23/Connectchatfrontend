@@ -9,7 +9,11 @@ export function middleware(req) {
             return NextResponse.redirect(new URL("/", req.url)); // Unauthenticated
         }
 
+<<<<<<< HEAD
         if (token && pathname !== "/inbox") {
+=======
+        if (token && pathname === "/") {
+>>>>>>> d0cfd7dbeb7a8e1a9bc2d0fc0c2a98d23da18ade
             return NextResponse.redirect(new URL("/inbox", req.url)); // Already authenticated
         }
 
@@ -22,4 +26,8 @@ export function middleware(req) {
 
 export const config = {
     matcher: ["/", "/inbox"],
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> d0cfd7dbeb7a8e1a9bc2d0fc0c2a98d23da18ade
