@@ -1,19 +1,25 @@
 import { NextResponse } from "next/server";
 
 export function middleware(req) {
-    const token = req.cookies.get("token")?.value; // Get token from cookies
+    try {
+        const token = req.cookies.get("token")?.value;
+        const pathname = req.nextUrl.pathname;
 
-    if (!token) {
-        return NextResponse.redirect(new URL("/", req.url)); // Redirect to login page
-    }
-    if (token && req.nextUrl.pathname !== "/inbox") 
-    {
-        return NextResponse.redirect(new URL("/inbox", req.url)); 
-    }
+        if (!token && pathname === "/inbox") {
+            return NextResponse.redirect(new URL("/", req.url)); // Unauthenticated
+        }
 
-    return NextResponse.next(); // Allow access if token exists
+        if (token && pathname !== "/inbox") {
+            return NextResponse.redirect(new URL("/inbox", req.url)); // Already authenticated
+        }
+
+        return NextResponse.next(); // Allow other cases
+    } catch (err) {
+        console.error("Middleware error:", err);
+        return NextResponse.next(); // Fail-safe to avoid 500 loop
+    }
 }
 
 export const config = {
-    matcher: ["/","/inbox"], // Apply middleware to /inbox route
+    matcher: ["/", "/inbox"],
 };
