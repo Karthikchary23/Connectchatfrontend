@@ -5,19 +5,18 @@ export function middleware(req) {
         const token = req.cookies.get("token")?.value;
         const pathname = req.nextUrl.pathname;
 
+        // Redirect unauthenticated users trying to access "/inbox"
         if (!token && pathname === "/inbox") {
             return NextResponse.redirect(new URL("/", req.url)); // Unauthenticated
         }
 
-<<<<<<< HEAD
+        // Redirect authenticated users trying to access "/"
         if (token && pathname !== "/inbox") {
-=======
-        if (token && pathname === "/") {
->>>>>>> d0cfd7dbeb7a8e1a9bc2d0fc0c2a98d23da18ade
             return NextResponse.redirect(new URL("/inbox", req.url)); // Already authenticated
         }
 
-        return NextResponse.next(); // Allow other cases
+        // Allow other cases
+        return NextResponse.next();
     } catch (err) {
         console.error("Middleware error:", err);
         return NextResponse.next(); // Fail-safe to avoid 500 loop
@@ -26,8 +25,5 @@ export function middleware(req) {
 
 export const config = {
     matcher: ["/", "/inbox"],
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> d0cfd7dbeb7a8e1a9bc2d0fc0c2a98d23da18ade
+
