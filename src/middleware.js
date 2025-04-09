@@ -6,7 +6,7 @@ export function middleware(req) {
     if (!token) {
         return NextResponse.redirect(new URL("/", req.url)); // Redirect to login page
     }
-    if (token && req.nextUrl.pathname !== "/inbox") 
+    if (token && req.nextUrl.pathname === "/") 
     {
         return NextResponse.redirect(new URL("/inbox", req.url)); 
     }
