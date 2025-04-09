@@ -24,6 +24,6 @@ export function middleware(req) {
 }
 
 export const config = {
-    matcher: ["/", "/inbox"],
+    matcher: ["/", "/inbox","/:path*"],
 };
 
