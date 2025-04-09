@@ -12,5 +12,5 @@ export function middleware(req) {
 }
 
 export const config = {
-    matcher: ["/","/inbox"], // Apply middleware to /inbox route
+    matcher: ["/inbox"], // Apply middleware to /inbox route
 };
